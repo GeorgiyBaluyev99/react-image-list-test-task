@@ -1,37 +1,36 @@
 import React from "react";
 import { Box, ImageList as ImageListMaterial, ImageListItem, CircularProgress } from '@mui/material'
+import {Masonry} from "@mui/lab";
 import InfiniteScroll from "react-infinite-scroll-component";
+import './ImageList.css'
 
-const ImageList = ({ photos, setPage, currentPage }) => {
-
-    return (
-        <Box
-            id="scrollableDiv"
-            component='div'
+const ImageList = ({ photos, setPage, currentPage, toggleIsModalOpen }) => (
+    <Box
+        id="scrollableDiv"
+        component='div'
+    >
+        <InfiniteScroll
+            dataLength={photos.length}
+            next={() => setPage(currentPage + 1)}
+            hasMore={true}
+            loader={<CircularProgress />}
+            scrollableTarget= "scrolableDiv"
         >
-                <InfiniteScroll
-                    dataLength={photos.length}
-                    next={() => setPage(currentPage + 1)}
-                    hasMore={true}
-                    loader={<CircularProgress />}
-                    scrollableTarget= "scrolableDiv"
-                >
-                    <ImageListMaterial sx={{ overflow: 'hidden' }} variant="woven" cols={3} gap={8}>
-                    {photos.map((item, id) => (
-                        <ImageListItem key={`${item.id}-${id}`}>
-                            <img
-                                src={item.urls.raw}
-                                alt={item.alt_description}
-                                style={{ minHeight: 10 }}
-                                loading="lazy"
-                            />
-                        </ImageListItem>
+            <Masonry columns={3} gap={8}>
+                {photos.map((item, id) => (
+                        <img
+                            onClick={() => toggleIsModalOpen(id)}
+                            key={`${item.id}-${id}`}
+                            className='image'
+                            src={item.urls.raw}
+                            alt={item.alt_description}
+                            loading="lazy"
+                        />
 
-                    ))}
-                    </ImageListMaterial>
-                </InfiniteScroll>
-        </Box>
-    )
-}
+                ))}
+            </Masonry>
+        </InfiniteScroll>
+    </Box>
+)
 
 export default ImageList

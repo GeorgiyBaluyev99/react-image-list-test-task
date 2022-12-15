@@ -8,6 +8,21 @@ const MainPage = () => {
     const [isModalOpen, toggleIsModalOpen] = useState(false)
     const [photos, setPhotos] = useState([])
     const [currentPage, setPage] = useState(1)
+    const [currentSlide, setCurrentSlide] = useState(0)
+    const [isLoading, toggleIsLoading] = useState(false)
+
+    const handleOpenModal = (id) => {
+        toggleIsModalOpen(true)
+        setCurrentSlide(id)
+    }
+
+    const handleChangeSlide = (id) => {
+        toggleIsLoading(true)
+        if (id >= photos.length - 1) {
+            setPage(currentPage + 1)
+        }
+        setCurrentSlide(id)
+    }
 
     const fetchMore = async (page = 1) => {
         const data = await fetchData(page)
@@ -21,11 +36,21 @@ const MainPage = () => {
   return (
         <div className='main-page_wrapper'>
             <ImageList
+                toggleIsModalOpen={handleOpenModal}
                 photos={photos}
                 currentPage={currentPage}
                 setPage={setPage}
             />
-            {isModalOpen && <ImageModal/>}
+            {isModalOpen && (
+                <ImageModal
+                    onClose={() => toggleIsModalOpen(false)}
+                    open={isModalOpen}
+                    handleChangeSlide={handleChangeSlide}
+                    currentSlide={currentSlide}
+                    slide={photos[currentSlide]}
+                />
+            )
+            }
         </div>
   );
 }

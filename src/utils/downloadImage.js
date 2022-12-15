@@ -6,6 +6,6 @@ export const downloadImage = async (url, downloadUrl, id) => {
         await axios.get(downloadUrl)
         saveAs(url, id)
     } catch (e) {
-        console.log("Download Error: ", e)
+        console.log('Download Error: ', e)
     }
 }

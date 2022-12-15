@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import ImageModal from '../ImageModal/index'
 import ImageList from '../ImageList'
-import { fetchData } from "../../utils/fetchData";
+import { fetchData } from '../../utils/fetchData'
 import './MainPage.css'
 
 const MainPage = () => {

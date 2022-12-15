@@ -1,8 +1,8 @@
-import React from "react";
-import { styled, alpha } from '@mui/material/styles';
-import { Button, Menu, MenuItem, Divider } from "@mui/material";
+import React from 'react'
+import { styled, alpha } from '@mui/material/styles'
+import { Button, Menu, MenuItem, Divider } from '@mui/material'
 import { KeyboardArrowDown } from '@mui/icons-material'
-import { downloadImage } from "../../utils/downloadImage";
+import { downloadImage } from '../../utils/downloadImage'
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -45,8 +45,10 @@ const StyledMenu = styled((props) => (
     },
 }));
 
-const DownloadButton = ({ slide }) => {
+const DownloadButton = ({ slide, width }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const buttonStyle = width > 400 ? {} : { width: '80%' }
+    const buttonContainerStyle = width > 400 ? {} : { display: 'flex', justifyContent: 'center' }
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -61,14 +63,15 @@ const DownloadButton = ({ slide }) => {
     }
 
     return (
-        <div>
+        <div style={buttonContainerStyle}>
             <Button
+                style={buttonStyle}
                 color='success'
-                id="demo-customized-button"
+                id='demo-customized-button'
                 aria-controls={open ? 'demo-customized-menu' : undefined}
-                aria-haspopup="true"
+                aria-haspopup='true'
                 aria-expanded={open ? 'true' : undefined}
-                variant="contained"
+                variant='contained'
                 disableElevation
                 onClick={handleClick}
                 endIcon={<KeyboardArrowDown />}
@@ -76,7 +79,7 @@ const DownloadButton = ({ slide }) => {
                 Download
             </Button>
             <StyledMenu
-                id="demo-customized-menu"
+                id='demo-customized-menu'
                 MenuListProps={{
                     'aria-labelledby': 'demo-customized-button',
                 }}

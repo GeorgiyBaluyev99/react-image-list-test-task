@@ -1,10 +1,12 @@
-import React from "react";
-import { Backdrop, Modal, CardHeader, Card, IconButton, Avatar, CardMedia } from "@mui/material";
-import { Close, ArrowBackIos, ArrowForwardIos, MoreHoriz } from '@mui/icons-material'
-import DownloadButton from "./DownloadButton";
+import React from 'react'
+import { Backdrop, Modal, CardHeader, Card, IconButton, Avatar, CardMedia } from '@mui/material'
+import { Close, ArrowBackIos, ArrowForwardIos } from '@mui/icons-material'
+import DownloadButton from './DownloadButton'
+import useWindowDimensions from '../../hooks/useDimensions'
 import './ImageModal.css'
 
 const ImageModal = ({ slide, open, currentSlide, onClose, handleChangeSlide }) => {
+    const { width } = useWindowDimensions()
 
     const getUserName = () => {
         let name = ''
@@ -32,20 +34,21 @@ const ImageModal = ({ slide, open, currentSlide, onClose, handleChangeSlide }) =
                     <Card className='modal-content'>
                         <CardHeader
                             avatar={
-                                <Avatar src={slide.user.profile_image.medium} alt={slide.user.bio} />
+                                <Avatar src={slide.user.profile_image.medium} alt={slide.user.bio}/>
                             }
                             action={
-                                <DownloadButton slide={slide} />
+                                width > 400 && <DownloadButton width={width} slide={slide}/>
                             }
                             title={getUserName()}
                         />
                         <CardMedia
                             style={{ objectFit: 'contain' }}
-                            component="img"
+                            component='img'
                             height='500'
                             image={slide.urls.full}
                             alt={slide.alt_description}
                         />
+                        {width < 400 && <DownloadButton width={width} slide={slide}/>}
                     </Card>
                     <IconButton onClick={() => handleChangeSlide(currentSlide + 1)}>
                         <ArrowForwardIos />

@@ -1,12 +1,8 @@
-import axios from 'axios'
+import axios from '../axios'
 
 export const fetchData = async page => {
     try {
-        const response = await axios.get(`https://api.unsplash.com/photos?${page}`, {
-            headers : {
-                Authorization: `Client-ID ${process.env.REACT_APP_ACCESS_KEY}`
-            }
-        })
+        const response = await axios.get(`https://api.unsplash.com/photos?${page}`)
         return response.data
     } catch (e) {
         console.log('Error: ', e)

@@ -1,6 +1,7 @@
 import React from "react";
 import { Backdrop, Modal, CardHeader, Card, IconButton, Avatar, CardMedia } from "@mui/material";
 import { Close, ArrowBackIos, ArrowForwardIos, MoreHoriz } from '@mui/icons-material'
+import DownloadButton from "./DownloadButton";
 import './ImageModal.css'
 
 const ImageModal = ({ slide, open, currentSlide, onClose, handleChangeSlide }) => {
@@ -34,9 +35,7 @@ const ImageModal = ({ slide, open, currentSlide, onClose, handleChangeSlide }) =
                                 <Avatar src={slide.user.profile_image.medium} alt={slide.user.bio} />
                             }
                             action={
-                                <IconButton aria-label="settings">
-                                    <MoreHoriz />
-                                </IconButton>
+                                <DownloadButton slide={slide} />
                             }
                             title={getUserName()}
                         />

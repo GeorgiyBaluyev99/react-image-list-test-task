@@ -9,7 +9,6 @@ const MainPage = () => {
     const [photos, setPhotos] = useState([])
     const [currentPage, setPage] = useState(1)
     const [currentSlide, setCurrentSlide] = useState(0)
-    const [isLoading, toggleIsLoading] = useState(false)
 
     const handleOpenModal = (id) => {
         toggleIsModalOpen(true)
@@ -17,7 +16,6 @@ const MainPage = () => {
     }
 
     const handleChangeSlide = (id) => {
-        toggleIsLoading(true)
         if (id >= photos.length - 1) {
             setPage(currentPage + 1)
         }

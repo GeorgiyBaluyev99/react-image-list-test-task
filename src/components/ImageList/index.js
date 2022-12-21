@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, CircularProgress } from '@mui/material'
+import { Box } from '@mui/material'
 import { Masonry } from '@mui/lab'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import useWindowDimensions from '../../hooks/useDimensions'
@@ -19,7 +19,7 @@ const ImageList = ({ photos, setPage, currentPage, toggleIsModalOpen }) => {
                 dataLength={photos.length}
                 next={() => setPage(currentPage + 1)}
                 hasMore={true}
-                loader={<CircularProgress />}
+                loader={null}
                 scrollableTarget= 'scrolableDiv'
             >
                 <Masonry columns={columns} gap={8}>
